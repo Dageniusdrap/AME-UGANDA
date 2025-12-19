@@ -47,12 +47,25 @@ export default function JobsPage() {
 
     return (
         <div className="min-h-screen bg-slate-50 pt-20">
-            <section className="bg-aviation-900 text-white py-20">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                    <h1 className="text-4xl md:text-5xl font-bold mb-6">Aviation Careers</h1>
-                    <p className="text-xl text-aviation-200 max-w-2xl mx-auto">
-                        Find your next opportunity or post a vacancy to reach Uganda's top engineering talent.
-                    </p>
+            <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
+                <div className="absolute inset-0 z-0">
+                    <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-gray-900 to-slate-950"></div>
+                    <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'url("https://www.transparenttextures.com/patterns/carbon-fibre.png")' }}></div>
+                </div>
+
+                <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center lg:text-left">
+                    <div className="max-w-4xl">
+                        <div className="inline-flex items-center space-x-2 bg-slate-700/30 text-slate-300 border border-slate-600/30 px-4 py-1.5 rounded-full text-sm font-semibold mb-6 backdrop-blur-sm animate-fade-in-up">
+                            <Briefcase className="w-4 h-4" />
+                            <span>Career Acceleration</span>
+                        </div>
+                        <h1 className="text-5xl lg:text-7xl font-bold text-white mb-8 tracking-tight leading-tight animate-fade-in-up delay-100">
+                            Aviation <span className="text-transparent bg-clip-text bg-gradient-to-r from-slate-200 to-gray-400">Careers</span>
+                        </h1>
+                        <p className="text-xl text-slate-400 mb-10 leading-relaxed max-w-2xl animate-fade-in-up delay-200">
+                            Connect with top engineering talent and premium employers. The official job board for Uganda's aviation professionals.
+                        </p>
+                    </div>
                 </div>
             </section>
 

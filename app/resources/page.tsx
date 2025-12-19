@@ -30,12 +30,25 @@ export default function ResourcesPage() {
 
     return (
         <div className="min-h-screen bg-slate-50 pt-20">
-            <section className="bg-aviation-900 text-white py-20">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                    <h1 className="text-4xl md:text-5xl font-bold mb-6">Resources Library</h1>
-                    <p className="text-xl text-aviation-200 max-w-2xl mx-auto">
-                        Access technical documents, regulatory updates, and career tools to support your profession.
-                    </p>
+            <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
+                <div className="absolute inset-0 z-0">
+                    <div className="absolute inset-0 bg-gradient-to-br from-teal-950 via-slate-900 to-teal-950"></div>
+                    <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'url("https://www.transparenttextures.com/patterns/carbon-fibre.png")' }}></div>
+                </div>
+
+                <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center lg:text-left">
+                    <div className="max-w-4xl">
+                        <div className="inline-flex items-center space-x-2 bg-teal-500/20 text-teal-300 border border-teal-500/30 px-4 py-1.5 rounded-full text-sm font-semibold mb-6 backdrop-blur-sm animate-fade-in-up">
+                            <Book className="w-4 h-4" />
+                            <span>Knowledge Hub</span>
+                        </div>
+                        <h1 className="text-5xl lg:text-7xl font-bold text-white mb-8 tracking-tight leading-tight animate-fade-in-up delay-100">
+                            Resources <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-cyan-200">Library</span>
+                        </h1>
+                        <p className="text-xl text-slate-300 mb-10 leading-relaxed max-w-2xl animate-fade-in-up delay-200">
+                            Access technical documents, regulatory updates, and career tools. Empowering your professional journey with the right information.
+                        </p>
+                    </div>
                 </div>
             </section>
 

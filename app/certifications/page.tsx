@@ -99,12 +99,24 @@ export default function CertificationsPage() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
       {/* Hero Section */}
-      <section className="bg-gradient-to-r from-aviation-600 to-aviation-800 text-white py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">Professional Certifications & Development</h1>
-            <p className="text-xl text-aviation-100 mb-6">
-              Track your licenses, certifications, and continuous professional development. Stay compliant and advance your career.
+      {/* Hero Section */}
+      <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
+        <div className="absolute inset-0 z-0">
+          <div className="absolute inset-0 bg-gradient-to-br from-sky-950 via-slate-900 to-sky-950"></div>
+          <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'url("https://www.transparenttextures.com/patterns/carbon-fibre.png")' }}></div>
+        </div>
+
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center lg:text-left">
+          <div className="max-w-4xl">
+            <div className="inline-flex items-center space-x-2 bg-sky-500/20 text-sky-300 border border-sky-500/30 px-4 py-1.5 rounded-full text-sm font-semibold mb-6 backdrop-blur-sm animate-fade-in-up">
+              <Award className="w-4 h-4" />
+              <span>Excellence Verified</span>
+            </div>
+            <h1 className="text-5xl lg:text-7xl font-bold text-white mb-8 tracking-tight leading-tight animate-fade-in-up delay-100">
+              Professional <br /> <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-cyan-200">Certifications</span>
+            </h1>
+            <p className="text-xl text-slate-300 mb-10 leading-relaxed max-w-2xl animate-fade-in-up delay-200">
+              Track your licenses, certifications, and continuous professional development. Maintain your competitive edge with our automated tracking and compliance tools.
             </p>
           </div>
         </div>
@@ -123,11 +135,10 @@ export default function CertificationsPage() {
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
-                className={`py-4 px-2 font-semibold border-b-2 transition flex items-center gap-2 ${
-                  activeTab === tab.id
-                    ? 'text-aviation-600 border-aviation-600'
-                    : 'text-gray-600 border-transparent hover:text-aviation-600'
-                }`}
+                className={`py-4 px-2 font-semibold border-b-2 transition flex items-center gap-2 ${activeTab === tab.id
+                  ? 'text-aviation-600 border-aviation-600'
+                  : 'text-gray-600 border-transparent hover:text-aviation-600'
+                  }`}
               >
                 <span className="text-lg">{tab.icon}</span> {tab.label}
               </button>
@@ -159,7 +170,7 @@ export default function CertificationsPage() {
                   icon: <TrendingUp className="w-8 h-8" />,
                   label: 'Compliance Status',
                   value: 'Excellent',
-                  color: 'bg-purple-100 text-purple-600',
+                  color: 'bg-sky-100 text-sky-600',
                 },
               ].map((stat, i) => (
                 <div key={i} className="bg-white border border-gray-200 rounded-lg p-6">
@@ -261,9 +272,8 @@ export default function CertificationsPage() {
                       <h3 className="text-lg font-bold">{course.name}</h3>
                       <p className="text-gray-600 text-sm">{course.provider}</p>
                     </div>
-                    <span className={`px-3 py-1 rounded-full text-xs font-semibold ${
-                      course.status === 'COMPLETED' ? 'bg-green-100 text-green-800' : 'bg-blue-100 text-blue-800'
-                    }`}>
+                    <span className={`px-3 py-1 rounded-full text-xs font-semibold ${course.status === 'COMPLETED' ? 'bg-green-100 text-green-800' : 'bg-blue-100 text-blue-800'
+                      }`}>
                       {course.status === 'COMPLETED' ? '✓ Completed' : 'In Progress'}
                     </span>
                   </div>

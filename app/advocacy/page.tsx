@@ -106,18 +106,30 @@ export default function AdvocacyPage() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
       {/* Hero Section */}
-      <section className="bg-gradient-to-r from-aviation-600 to-aviation-800 text-white py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl">
-            <h1 className="text-3xl md:text-5xl font-bold mb-6">Advocacy & Member Protection</h1>
-            <p className="text-xl text-aviation-100 mb-6">
+      {/* Hero Section */}
+      <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
+        <div className="absolute inset-0 z-0">
+          <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-aviation-950 to-slate-900"></div>
+          <div className="absolute inset-0 opacity-20" style={{ backgroundImage: 'radial-gradient(#4f46e5 1px, transparent 1px)', backgroundSize: '32px 32px' }}></div>
+        </div>
+
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center lg:text-left">
+          <div className="max-w-4xl">
+            <div className="inline-flex items-center space-x-2 bg-aviation-500/20 text-aviation-200 border border-aviation-500/30 px-4 py-1.5 rounded-full text-sm font-semibold mb-6 backdrop-blur-sm animate-fade-in-up">
+              <Shield className="w-4 h-4" />
+              <span>We Stand Together</span>
+            </div>
+            <h1 className="text-5xl lg:text-7xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white via-slate-200 to-aviation-200 mb-8 tracking-tight leading-tight animate-fade-in-up delay-100">
+              Advocacy & Member <br /> Protection
+            </h1>
+            <p className="text-xl text-slate-300 mb-10 leading-relaxed max-w-2xl animate-fade-in-up delay-200">
               Aviation Engineers Uganda is a movement to reclaim our industry. We demand the prioritization of qualified Ugandan engineers over foreign labor, ensuring fair wages and equal benefits for our Aeronautical, Aerospace, and Maintenance experts.
             </p>
-            <div className="flex flex-wrap gap-3">
-              <Link href="/sign-up" className="bg-white text-aviation-600 px-6 py-2 rounded-lg font-semibold hover:bg-aviation-50 transition">
+            <div className="flex flex-wrap gap-4 justify-center lg:justify-start animate-fade-in-up delay-300">
+              <Link href="/sign-up" className="bg-aviation-600 text-white px-8 py-4 rounded-full font-bold shadow-lg shadow-aviation-600/25 hover:bg-aviation-500 hover:scale-105 transition-all duration-300">
                 Join the Movement
               </Link>
-              <button className="border-2 border-white text-white px-6 py-2 rounded-lg font-semibold hover:bg-white/10 transition">
+              <button className="bg-white/5 text-white border border-white/10 px-8 py-4 rounded-full font-bold hover:bg-white/10 transition-all duration-300 backdrop-blur-sm">
                 Read Our Manifesto
               </button>
             </div>

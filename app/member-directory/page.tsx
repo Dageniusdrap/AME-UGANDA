@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Search, MapPin, Award, Briefcase, Filter, ChevronDown } from 'lucide-react';
+import { Search, MapPin, Award, Briefcase, Filter, ChevronDown, Users } from 'lucide-react';
 
 export default function MemberDirectoryPage() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -99,23 +99,37 @@ export default function MemberDirectoryPage() {
 
   const filteredMembers = members.filter(member => {
     const matchesSearch = member.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                          member.title.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesSpecialization = selectedSpecialization === 'all' || 
-                                  member.specializations.includes(selectedSpecialization);
+      member.title.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesSpecialization = selectedSpecialization === 'all' ||
+      member.specializations.includes(selectedSpecialization);
     const matchesLicense = selectedLicense === 'all' || member.license === selectedLicense;
-    
+
     return matchesSearch && matchesSpecialization && matchesLicense;
   });
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
       {/* Hero Section */}
-      <section className="bg-gradient-to-r from-purple-600 to-purple-800 text-white py-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h1 className="text-4xl font-bold mb-4">Member Directory</h1>
-          <p className="text-purple-100">
-            Connect with verified aircraft maintenance professionals and aerospace engineers across Uganda and the region.
-          </p>
+      {/* Hero Section */}
+      <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
+        <div className="absolute inset-0 z-0">
+          <div className="absolute inset-0 bg-gradient-to-br from-indigo-950 via-slate-900 to-indigo-950"></div>
+          <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'url("https://www.transparenttextures.com/patterns/carbon-fibre.png")' }}></div>
+        </div>
+
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center lg:text-left">
+          <div className="max-w-4xl">
+            <div className="inline-flex items-center space-x-2 bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 px-4 py-1.5 rounded-full text-sm font-semibold mb-6 backdrop-blur-sm animate-fade-in-up">
+              <Users className="w-4 h-4" />
+              <span>Connect Globally</span>
+            </div>
+            <h1 className="text-5xl lg:text-7xl font-bold text-white mb-8 tracking-tight leading-tight animate-fade-in-up delay-100">
+              Member <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-sky-200">Directory</span>
+            </h1>
+            <p className="text-xl text-slate-300 mb-10 leading-relaxed max-w-2xl animate-fade-in-up delay-200">
+              Connect with verified aircraft maintenance professionals and aerospace engineers across Uganda and the region. Build your network with trusted peers.
+            </p>
+          </div>
         </div>
       </section>
 
@@ -131,7 +145,7 @@ export default function MemberDirectoryPage() {
                 placeholder="Search by name, title, location..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-200"
+                className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-aviation-500 focus:ring-2 focus:ring-aviation-500/20 transition-all shadow-sm"
               />
             </div>
           </div>
@@ -144,7 +158,7 @@ export default function MemberDirectoryPage() {
               <select
                 value={selectedLicense}
                 onChange={(e) => setSelectedLicense(e.target.value)}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-purple-500"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-aviation-500 focus:ring-2 focus:ring-aviation-500/20 transition-all font-medium text-slate-700"
               >
                 {licenses.map(license => (
                   <option key={license.value} value={license.value}>
@@ -160,7 +174,7 @@ export default function MemberDirectoryPage() {
               <select
                 value={selectedSpecialization}
                 onChange={(e) => setSelectedSpecialization(e.target.value)}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-purple-500"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-aviation-500 focus:ring-2 focus:ring-aviation-500/20 transition-all font-medium text-slate-700"
               >
                 {specializations.map(spec => (
                   <option key={spec} value={spec === 'All' ? 'all' : spec}>
@@ -214,14 +228,14 @@ export default function MemberDirectoryPage() {
                   <p className="text-xs text-gray-600 font-semibold mb-2">Specializations:</p>
                   <div className="flex flex-wrap gap-2">
                     {member.specializations.map((spec, i) => (
-                      <span key={i} className="bg-purple-100 text-purple-700 px-2 py-1 rounded text-xs">
+                      <span key={i} className="bg-slate-100 text-slate-700 border border-slate-200 px-2.5 py-1 rounded-md text-xs font-medium group-hover:border-aviation-200 group-hover:text-aviation-700 transition-colors">
                         {spec}
                       </span>
                     ))}
                   </div>
                 </div>
 
-                <button className="w-full bg-purple-600 text-white py-2 rounded-lg font-semibold hover:bg-purple-700 transition">
+                <button className="w-full bg-gradient-to-r from-aviation-600 to-aviation-700 text-white py-2.5 rounded-lg font-bold shadow-lg shadow-aviation-600/20 hover:shadow-aviation-600/30 hover:scale-[1.02] transition-all duration-300 border border-aviation-600/20">
                   Connect
                 </button>
               </div>
@@ -236,7 +250,7 @@ export default function MemberDirectoryPage() {
                 setSelectedSpecialization('all');
                 setSelectedLicense('all');
               }}
-              className="text-purple-600 hover:text-purple-700 font-semibold"
+              className="text-aviation-600 hover:text-aviation-700 font-semibold underline decoration-2 decoration-transparent hover:decoration-aviation-600 transition-all"
             >
               Reset Filters
             </button>
@@ -245,7 +259,7 @@ export default function MemberDirectoryPage() {
       </section>
 
       {/* Stats */}
-      <section className="bg-purple-50 py-12">
+      <section className="bg-slate-50 py-12 border-t border-slate-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold mb-8 text-center">Member Community Stats</h2>
           <div className="grid md:grid-cols-4 gap-6">
@@ -255,8 +269,8 @@ export default function MemberDirectoryPage() {
               { label: 'Countries Represented', value: '5' },
               { label: 'Average Experience', value: '12 years' },
             ].map((stat, i) => (
-              <div key={i} className="bg-white rounded-lg p-6 text-center border border-purple-200">
-                <p className="text-3xl font-bold text-purple-600 mb-2">{stat.value}</p>
+              <div key={i} className="bg-white rounded-lg p-6 text-center border border-slate-200 hover:border-aviation-200 hover:shadow-lg transition-all duration-300 group">
+                <p className="text-3xl font-bold text-slate-800 group-hover:text-aviation-600 transition-colors mb-2">{stat.value}</p>
                 <p className="text-gray-600">{stat.label}</p>
               </div>
             ))}

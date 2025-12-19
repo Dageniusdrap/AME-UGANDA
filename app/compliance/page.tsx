@@ -107,8 +107,8 @@ export default function CompliancePage() {
     return icons[type] || <FileText className="w-5 h-5" />;
   };
 
-  const filteredUpdates = activeFilter === 'all' 
-    ? updates 
+  const filteredUpdates = activeFilter === 'all'
+    ? updates
     : updates.filter(u => u.severity === activeFilter);
 
   const criticalCount = updates.filter(u => u.severity === 'CRITICAL').length;
@@ -117,12 +117,24 @@ export default function CompliancePage() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
       {/* Hero Section */}
-      <section className="bg-gradient-to-r from-blue-600 to-blue-800 text-white py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">Regulatory Compliance Tracker</h1>
-            <p className="text-xl text-blue-100 mb-6">
-              Stay updated on aviation regulations, safety directives, and compliance requirements affecting Uganda's aerospace sector.
+      {/* Hero Section */}
+      <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
+        <div className="absolute inset-0 z-0">
+          <div className="absolute inset-0 bg-gradient-to-br from-blue-950 via-slate-900 to-blue-950"></div>
+          <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'url("https://www.transparenttextures.com/patterns/carbon-fibre.png")' }}></div>
+        </div>
+
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center lg:text-left">
+          <div className="max-w-4xl">
+            <div className="inline-flex items-center space-x-2 bg-blue-500/20 text-blue-300 border border-blue-500/30 px-4 py-1.5 rounded-full text-sm font-semibold mb-6 backdrop-blur-sm animate-fade-in-up">
+              <CheckCircle className="w-4 h-4" />
+              <span>Stay Compliant</span>
+            </div>
+            <h1 className="text-5xl lg:text-7xl font-bold text-white mb-8 tracking-tight leading-tight animate-fade-in-up delay-100">
+              Regulatory <br /> <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-200">Compliance Tracker</span>
+            </h1>
+            <p className="text-xl text-slate-300 mb-10 leading-relaxed max-w-2xl animate-fade-in-up delay-200">
+              Stay ahead of the curve. Real-time tracking of aviation regulations, safety directives, and compliance requirements affecting Uganda's aerospace sector.
             </p>
           </div>
         </div>
@@ -172,11 +184,10 @@ export default function CompliancePage() {
             <button
               key={filter}
               onClick={() => setActiveFilter(filter)}
-              className={`px-4 py-2 rounded-lg font-semibold transition ${
-                activeFilter === filter
+              className={`px-4 py-2 rounded-lg font-semibold transition ${activeFilter === filter
                   ? 'bg-blue-600 text-white'
                   : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
-              }`}
+                }`}
             >
               {filter === 'all' ? 'All Updates' : `${filter} Priority`}
             </button>
@@ -203,9 +214,8 @@ export default function CompliancePage() {
                       </div>
                       <div className="flex items-center justify-between text-sm">
                         <span className="text-gray-600"><strong>Authority:</strong> {update.authority}</span>
-                        <span className={`text-gray-600 font-semibold ${
-                          update.daysUntilEffective < 30 ? 'text-red-600' : ''
-                        }`}>
+                        <span className={`text-gray-600 font-semibold ${update.daysUntilEffective < 30 ? 'text-red-600' : ''
+                          }`}>
                           Effective in {update.daysUntilEffective} days
                         </span>
                       </div>
