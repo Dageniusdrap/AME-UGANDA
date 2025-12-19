@@ -111,14 +111,14 @@ export default function AdvocacyPage() {
           <div className="max-w-3xl">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">Advocacy & Member Protection</h1>
             <p className="text-xl text-aviation-100 mb-6">
-              Aviation Engineers Uganda advocates for the rights, safety, and professional interests of aircraft maintenance engineers, technicians, and aerospace professionals.
+              Aviation Engineers Uganda is a movement to reclaim our industry. We demand the prioritization of qualified Ugandan engineers over foreign labor, ensuring fair wages and equal benefits for our Aeronautical, Aerospace, and Maintenance experts.
             </p>
             <div className="flex flex-wrap gap-3">
-              <button className="bg-white text-aviation-600 px-6 py-2 rounded-lg font-semibold hover:bg-aviation-50 transition">
-                Join Our Cause
-              </button>
+              <Link href="/sign-up" className="bg-white text-aviation-600 px-6 py-2 rounded-lg font-semibold hover:bg-aviation-50 transition">
+                Join the Movement
+              </Link>
               <button className="border-2 border-white text-white px-6 py-2 rounded-lg font-semibold hover:bg-white/10 transition">
-                Learn More
+                Read Our Manifesto
               </button>
             </div>
           </div>
@@ -132,13 +132,13 @@ export default function AdvocacyPage() {
           {[
             {
               icon: <Shield className="w-8 h-8" />,
-              title: 'Workplace Rights',
-              description: 'Protecting fair labor practices, safe working conditions, and member dignity.',
+              title: 'Uganda First',
+              description: 'Fighting for the First Right of Refusal for qualified Ugandan nationals in all technical aviation roles.',
             },
             {
               icon: <TrendingUp className="w-8 h-8" />,
-              title: 'Fair Compensation',
-              description: 'Advocating for competitive wages aligned with international standards.',
+              title: 'Equal Pay for Equal Work',
+              description: 'Addressing the wage gap between local and expatriate engineers doing the same job.',
             },
             {
               icon: <AlertCircle className="w-8 h-8" />,
@@ -182,8 +182,8 @@ export default function AdvocacyPage() {
                 key={tab}
                 onClick={() => setActiveTab(tab)}
                 className={`px-4 py-3 font-semibold transition ${activeTab === tab
-                    ? 'text-aviation-600 border-b-2 border-aviation-600'
-                    : 'text-gray-600 hover:text-aviation-600'
+                  ? 'text-aviation-600 border-b-2 border-aviation-600'
+                  : 'text-gray-600 hover:text-aviation-600'
                   }`}
               >
                 {tab === 'all' ? 'All' : `${tab} Priority`}

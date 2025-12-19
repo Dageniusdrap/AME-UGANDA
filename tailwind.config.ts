@@ -18,13 +18,7 @@ const config = {
             },
         },
         extend: {
-            animation: {
-                "accordion-down": "accordion-down 0.2s ease-out",
-                "accordion-up": "accordion-up 0.2s ease-out",
-                "fade-in-up": "fade-in-up 0.5s ease-out forwards",
-                "fade-in": "fade-in 0.7s ease-out forwards",
-                "float": "float 6s ease-in-out infinite",
-            },
+
             colors: {
                 border: "hsl(var(--border))",
                 input: "hsl(var(--input))",
@@ -100,6 +94,34 @@ const config = {
                     "0%, 100%": { transform: "translateY(0)" },
                     "50%": { transform: "translateY(-10px)" },
                 },
+                "gradient-x": {
+                    "0%, 100%": {
+                        "background-size": "200% 200%",
+                        "background-position": "left center"
+                    },
+                    "50%": {
+                        "background-size": "200% 200%",
+                        "background-position": "right center"
+                    },
+                },
+                "slow-zoom": {
+                    "0%": { transform: "scale(1)" },
+                    "100%": { transform: "scale(1.1)" },
+                },
+                "scroll": {
+                    "0%": { transform: "translateY(0)", opacity: "1" },
+                    "100%": { transform: "translateY(10px)", opacity: "0" },
+                },
+            },
+            animation: {
+                "accordion-down": "accordion-down 0.2s ease-out",
+                "accordion-up": "accordion-up 0.2s ease-out",
+                "fade-in-up": "fade-in-up 0.5s ease-out forwards",
+                "fade-in": "fade-in 0.7s ease-out forwards",
+                "float": "float 6s ease-in-out infinite",
+                "gradient-x": "gradient-x 8s ease infinite",
+                "slow-zoom": "slow-zoom 20s linear infinite alternate",
+                "scroll": "scroll 2s ease-in-out infinite",
             },
         },
     },

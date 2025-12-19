@@ -41,7 +41,7 @@ export default function Navbar() {
                                 Aviation Engineers Uganda
                             </h1>
                             <p className={`text-[9px] uppercase tracking-widest font-semibold transition-colors duration-300 ${effectiveIsScrolled ? 'text-aviation-600' : 'text-aviation-200'}`}>
-                                Excellence in Aviation
+                                Excellence in Aviation: Begins with us and ends with us
                             </p>
                         </div>
                     </Link>
@@ -114,10 +114,11 @@ export default function Navbar() {
                         }
                     </button>
                 </div>
-            </div>
+            </div >
 
             {/* Mobile Menu */}
-            <div className={`lg:hidden absolute w-full bg-white/95 backdrop-blur-xl border-b border-gray-100 transition-all duration-300 ease-in-out overflow-hidden ${isMenuOpen ? 'max-h-[48rem] opacity-100' : 'max-h-0 opacity-0'}`}>
+            < div className={`lg:hidden absolute w-full bg-white/95 backdrop-blur-xl border-b border-gray-100 transition-all duration-300 ease-in-out overflow-hidden ${isMenuOpen ? 'max-h-[48rem] opacity-100' : 'max-h-0 opacity-0'}`
+            }>
                 <div className="px-4 py-6 space-y-2">
                     <MobileNavLink href="/" onClick={() => setIsMenuOpen(false)}>Home</MobileNavLink>
                     <MobileNavLink href="/about" onClick={() => setIsMenuOpen(false)}>About</MobileNavLink>
@@ -148,8 +149,8 @@ export default function Navbar() {
                         </Link>
                     </div>
                 </div>
-            </div>
-        </nav>
+            </div >
+        </nav >
     );
 }
 

@@ -41,133 +41,156 @@ export default function HomePage() {
   return (
     <div className="min-h-screen bg-slate-50 font-sans selection:bg-aviation-200">
       {/* Hero Section */}
-      <section id="home" className="relative min-h-[90vh] flex items-center pt-20 overflow-hidden">
-        {/* Background Image with Overlay */}
+      {/* Hero Section */}
+      <section id="home" className="relative h-screen flex items-center justify-center overflow-hidden">
+        {/* Background Image with Cinematic Overlay */}
         <div className="absolute inset-0 z-0">
           <img
             src="https://images.unsplash.com/photo-1540962351504-03099e0a754b?q=80&w=2070&auto=format&fit=crop"
             alt="Aircraft Maintenance Hangar"
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover scale-105 animate-slow-zoom"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-slate-900/95 via-slate-900/80 to-aviation-900/40"></div>
+          <div className="absolute inset-0 bg-gradient-to-b from-slate-900/90 via-slate-900/70 to-slate-900/90"></div>
+          <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-20"></div>
         </div>
 
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-          <div className="max-w-4xl animate-fade-in-up">
-            <div className="inline-flex items-center space-x-2 bg-aviation-500/20 backdrop-blur-sm border border-aviation-400/30 rounded-full px-4 py-1.5 mb-8">
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full text-center">
+          <div className="animate-fade-in-up space-y-8">
+            <div className="inline-flex items-center space-x-3 bg-white/5 backdrop-blur-md border border-white/10 rounded-full px-5 py-2 mb-4 mx-auto hover:bg-white/10 transition-colors cursor-default">
               <span className="flex h-2 w-2 rounded-full bg-aviation-400 animate-pulse"></span>
-              <span className="text-aviation-100 text-sm font-medium tracking-wide">🛡️ Protecting Your Career & Rights in Aviation</span>
+              <span className="text-aviation-100 text-sm font-medium tracking-widest uppercase">The Voice of Ugandan Aviation</span>
             </div>
 
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold text-white tracking-tight leading-tight mb-8">
-              Empowering Uganda's <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-aviation-300 to-white">Aerospace Professionals</span>
+            <h1 className="text-5xl md:text-7xl lg:text-8xl font-black text-white tracking-tight leading-none">
+              Excellence in <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-aviation-300 via-white to-aviation-300 animate-gradient-x">
+                Aviation.
+              </span>
             </h1>
 
-            <p className="text-xl md:text-2xl text-slate-300 mb-10 max-w-2xl leading-relaxed font-light">
-              Aviation Engineers Uganda advocates for fair wages, safe working conditions, professional development, and career advancement. We protect the interests of aircraft maintenance engineers, technicians, and aerospace professionals across Uganda.
+            <p className="text-lg md:text-2xl text-slate-300 max-w-3xl mx-auto leading-relaxed font-light">
+              Championing the rights of <span className="text-white font-medium">Aircraft Maintenance</span>, <span className="text-white font-medium">Aeronautical</span>, and <span className="text-white font-medium">Aerospace Engineers</span>.
+              We stand for the prioritizing of local talent, fair benefits, and world-class standards.
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-4 items-start">
+            <div className="flex flex-col sm:flex-row gap-5 items-center justify-center pt-8">
               <Link
                 href="/sign-up"
-                className="group bg-white text-aviation-900 px-8 py-4 rounded-full font-bold text-lg hover:bg-aviation-50 transition-all duration-300 flex items-center shadow-2xl shadow-white/10"
+                className="group relative px-8 py-4 bg-white text-aviation-900 rounded-full font-bold text-lg shadow-2xl shadow-aviation-500/20 hover:scale-105 transition-transform duration-300 overflow-hidden"
               >
-                Become a Member
-                <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                <span className="relative z-10 flex items-center">
+                  Join the Movement <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                </span>
+                <div className="absolute inset-0 bg-aviation-50 opacity-0 group-hover:opacity-100 transition-opacity"></div>
               </Link>
               <Link
                 href="/advocacy"
-                className="group px-8 py-4 rounded-full font-semibold text-lg text-white border border-white/30 hover:bg-white/10 backdrop-blur-sm transition-all duration-300 flex items-center"
+                className="group px-8 py-4 rounded-full font-semibold text-lg text-white border border-white/20 hover:bg-white/5 backdrop-blur-sm transition-all duration-300 flex items-center"
               >
-                <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center mr-3 group-hover:scale-110 transition-transform">
-                  <Shield className="w-4 h-4 text-white" />
-                </div>
-                Our Advocacy Work
+                Our Advocacy
               </Link>
             </div>
           </div>
         </div>
 
-        {/* Scroll Indicator */}
+        {/* Scroll Down Hint */}
         <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce hidden md:block">
-          <div className="w-6 h-10 border-2 border-white/20 rounded-full flex justify-center p-1">
+          <div className="w-5 h-9 border-2 border-white/20 rounded-full flex justify-center p-1">
             <div className="w-1 h-2 bg-white/60 rounded-full animate-scroll"></div>
           </div>
         </div>
       </section>
 
-      {/* Bento Grid Features Section */}
-      <section id="benefits" className="py-24 bg-white">
+      {/* Mission & Features Bento Grid */}
+      <section id="mission" className="py-24 bg-slate-50 relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16 max-w-3xl mx-auto">
-            <h2 className="text-aviation-600 font-semibold tracking-wide uppercase text-sm mb-3">Our Mission</h2>
-            <h3 className="text-4xl md:text-5xl font-bold text-slate-900 mb-6">Protecting Your Career, Advancing Your Future</h3>
-            <p className="text-lg text-slate-600">
-              We advocate for fair wages, safe working conditions, professional recognition, and career advancement for Uganda's aerospace professionals.
+          <div className="text-center mb-20 max-w-3xl mx-auto">
+            <h2 className="text-aviation-600 font-bold tracking-widest uppercase text-xs mb-3">Our Core Mission</h2>
+            <h3 className="text-4xl md:text-5xl font-bold text-slate-900 mb-6">Local Talent. Global Standards.</h3>
+            <p className="text-lg text-slate-600 leading-relaxed">
+              We are dedicated to ending the disparity in hiring and benefits between local and foreign engineers. Your expertise deserves recognition and protection.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-4 grid-rows-2 gap-6 h-auto md:h-[600px]">
+          <div className="grid grid-cols-1 md:grid-cols-3 md:grid-rows-2 gap-6 h-auto md:h-[800px]">
 
-            {/* Main Feature - Member Protection */}
-            <div className="md:col-span-2 md:row-span-2 group relative overflow-hidden rounded-3xl bg-green-900 shadow-xl hover:shadow-2xl transition-all duration-300">
-              <img
-                src="https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=1000&auto=format&fit=crop"
-                className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform duration-700"
-                alt="Member Protection"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
-              <div className="absolute bottom-0 left-0 p-8 md:p-12">
-                <ShieldCheck className="w-12 h-12 text-green-400 mb-6" />
-                <h4 className="text-3xl font-bold text-white mb-2">Member Protection & Benefits</h4>
-                <p className="text-slate-300 leading-relaxed mb-6">Comprehensive health insurance, legal support, professional liability coverage, and protection from unfair workplace practices.</p>
-                <Link href="/member-protection" className="flex items-center text-white font-medium group-hover:text-green-300 transition-colors cursor-pointer">
-                  View All Benefits <ArrowRight className="w-4 h-4 ml-2" />
-                </Link>
+            {/* Feature 1: The "Why" - Advocacy (Large) */}
+            <div className="md:col-span-2 md:row-span-1 group relative overflow-hidden rounded-[2rem] bg-aviation-900 shadow-2xl transition-all duration-500 hover:shadow-aviation-900/30">
+              <div className="absolute inset-0 opacity-40 mix-blend-overlay">
+                <img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?q=80&w=2070&auto=format&fit=crop" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt="Engineers working" />
               </div>
-            </div>
-
-            {/* Feature 2 - Advocacy */}
-            <div className="md:col-span-1 md:row-span-1 bg-red-50 rounded-3xl p-8 hover:bg-red-100 transition-colors duration-300 flex flex-col justify-between group cursor-pointer border border-red-100">
-              <div className="bg-white w-12 h-12 rounded-2xl flex items-center justify-center shadow-sm text-red-600 group-hover:scale-110 transition-transform">
-                <Shield className="w-6 h-6" />
-              </div>
-              <div>
-                <h4 className="text-xl font-bold text-slate-900 mb-2">Advocacy</h4>
-                <p className="text-slate-600 text-sm">Fighting for fair wages, safety standards, and professional rights.</p>
-              </div>
-              <Link href="/advocacy" className="text-red-600 text-sm font-semibold hover:text-red-700">Learn more →</Link>
-            </div>
-
-            {/* Feature 3 - Certifications */}
-            <div className="md:col-span-1 md:row-span-1 bg-white rounded-3xl p-8 hover:bg-slate-50 transition-colors duration-300 flex flex-col justify-between border border-slate-100 shadow-lg group cursor-pointer">
-              <div className="bg-blue-100 w-12 h-12 rounded-2xl flex items-center justify-center shadow-sm text-blue-600 group-hover:scale-110 transition-transform">
-                <Award className="w-6 h-6" />
-              </div>
-              <div>
-                <h4 className="text-xl font-bold text-slate-900 mb-2">Certifications & CPD</h4>
-                <p className="text-slate-600 text-sm">Track licenses, build your CV, access training programs.</p>
-              </div>
-              <Link href="/certifications" className="text-blue-600 text-sm font-semibold hover:text-blue-700">Track your progress →</Link>
-            </div>
-
-            {/* Feature 4 - Jobs (Span 2) */}
-            <div className="md:col-span-2 md:row-span-1 bg-slate-900 rounded-3xl p-8 relative overflow-hidden group">
-              <div className="absolute top-0 right-0 w-64 h-64 bg-aviation-600/20 rounded-full blur-3xl -mr-16 -mt-16"></div>
-              <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between h-full">
-                <div className="max-w-xs">
-                  <div className="bg-aviation-500/20 w-12 h-12 rounded-2xl flex items-center justify-center mb-6 text-aviation-400">
-                    <Zap className="w-6 h-6" />
-                  </div>
-                  <h4 className="text-2xl font-bold text-white mb-2">Exclusive Jobs</h4>
-                  <p className="text-slate-400 text-sm">Member-only career opportunities from top airlines and MROs.</p>
+              <div className="relative z-10 p-10 flex flex-col justify-between h-full">
+                <ShieldCheck className="w-14 h-14 text-aviation-400 mb-6" />
+                <div>
+                  <h4 className="text-3xl font-bold text-white mb-3">Priority for Ugandan Engineers</h4>
+                  <p className="text-slate-300 text-lg leading-relaxed max-w-xl">
+                    We challenge policies that favor foreign labor over qualified local professionals. We advocate for "First Right of Refusal" for Ugandan nationals in all engineering roles.
+                  </p>
                 </div>
-                <div className="mt-6 md:mt-0">
-                  <Link href="/jobs" className="bg-white text-slate-900 px-6 py-3 rounded-xl font-bold text-sm hover:bg-aviation-50 transition-colors inline-block">
-                    View Jobs
+                <div className="mt-8">
+                  <Link href="/advocacy" className="inline-flex items-center text-white font-semibold group-hover:text-aviation-300 transition-colors">
+                    Read our Policy Paper <ArrowRight className="ml-2 w-4 h-4" />
                   </Link>
                 </div>
+              </div>
+            </div>
+
+            {/* Feature 2: Whistleblower / Report (Tall) */}
+            <div className="md:col-span-1 md:row-span-2 bg-white rounded-[2rem] p-8 shadow-xl border border-slate-100 flex flex-col relative group overflow-hidden">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-red-50 rounded-bl-[4rem] group-hover:scale-110 transition-transform duration-500"></div>
+              <div className="relative z-10 flex flex-col h-full">
+                <div className="bg-red-100 w-14 h-14 rounded-2xl flex items-center justify-center mb-8 text-red-600">
+                  <Shield className="w-7 h-7" />
+                </div>
+                <h4 className="text-2xl font-bold text-slate-900 mb-4">Report Unfair Practices</h4>
+                <p className="text-slate-600 mb-8 flex-grow">
+                  witnessed unfair hiring? Denied benefits given to expatriates? Report it anonymously. We use this data to challenge employers and lobby the government.
+                </p>
+
+                <div className="space-y-4">
+                  <div className="p-4 bg-slate-50 rounded-xl border border-slate-100">
+                    <p className="text-sm font-semibold text-slate-800">🔒 100% Anonymous</p>
+                    <p className="text-xs text-slate-500">Your identity is protected.</p>
+                  </div>
+                  <Link href="/report" className="w-full py-4 bg-red-600 text-white rounded-xl font-bold shadow-lg shadow-red-600/20 hover:bg-red-700 hover:shadow-red-600/40 transition-all text-center block">
+                    File a Report
+                  </Link>
+                </div>
+              </div>
+            </div>
+
+            {/* Feature 3: Career Growth */}
+            <div className="md:col-span-1 md:row-span-1 bg-white rounded-[2rem] p-8 shadow-xl border border-slate-100 hover:border-aviation-100 transition-all group">
+              <div className="flex justify-between items-start mb-6">
+                <div className="bg-blue-50 w-12 h-12 rounded-2xl flex items-center justify-center text-blue-600">
+                  <Zap className="w-6 h-6" />
+                </div>
+                <Link href="/jobs" className="text-slate-400 hover:text-blue-600 transition-colors"><ExternalLink className="w-5 h-5" /></Link>
+              </div>
+              <h4 className="text-xl font-bold text-slate-900 mb-2">Career Acceleration</h4>
+              <p className="text-slate-600 text-sm mb-4">Access premium job listings reserved for members before they go public.</p>
+              <div className="flex -space-x-2 overflow-hidden">
+                {[1, 2, 3].map(i => (
+                  <div key={i} className="inline-block h-8 w-8 rounded-full ring-2 ring-white bg-slate-200" />
+                ))}
+                <div className="h-8 w-8 rounded-full ring-2 ring-white bg-slate-100 flex items-center justify-center text-xs font-bold text-slate-500">+12</div>
+              </div>
+            </div>
+
+            {/* Feature 4: Certifications */}
+            <div className="md:col-span-1 md:row-span-1 bg-gradient-to-br from-slate-900 to-slate-800 rounded-[2rem] p-8 shadow-xl text-white group overflow-hidden relative">
+              <div className="absolute bottom-0 right-0 p-4 opacity-5">
+                <Award className="w-32 h-32" />
+              </div>
+              <div className="relative z-10">
+                <div className="bg-white/10 w-12 h-12 rounded-2xl flex items-center justify-center mb-6 text-aviation-300">
+                  <Award className="w-6 h-6" />
+                </div>
+                <h4 className="text-xl font-bold mb-2">Licensing & CPD</h4>
+                <p className="text-slate-400 text-sm mb-6">Track your EASA/UCAA modules and maintenance experience logs.</p>
+                <Link href="/certifications" className="text-aviation-300 font-semibold text-sm hover:text-white transition-colors flex items-center">
+                  Open Portal <ChevronRight className="w-4 h-4 ml-1" />
+                </Link>
               </div>
             </div>
 
