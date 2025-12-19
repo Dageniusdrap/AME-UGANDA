@@ -1,0 +1,693 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// User model synced with Clerk
+model User {
+  id            String   @id @default(cuid())
+  clerkId       String   @unique
+  email         String   @unique
+  firstName     String?
+  lastName      String?
+  profileImage  String?
+  role          UserRole @default(MEMBER)
+  
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  
+  member        Member?
+  posts         Post[]
+  comments      Comment[]
+  eventRegistrations EventRegistration[]
+  
+  @@index([clerkId])
+  @@index([email])
+}
+
+enum UserRole {
+  ADMIN
+  MODERATOR
+  MEMBER
+  GUEST
+}
+
+// Member professional profile
+model Member {
+  id                String          @id @default(cuid())
+  userId            String          @unique
+  user              User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  // Personal Information
+  phone             String?
+  dateOfBirth       DateTime?
+  nationality       String?
+  address           String?
+  city              String?
+  country           String          @default("Uganda")
+  
+  // Professional Information
+  licenseNumber     String?         @unique
+  licenseType       LicenseType?
+  licenseIssueDate  DateTime?
+  licenseExpiryDate DateTime?
+  employerName      String?
+  jobTitle          String?
+  yearsOfExperience Int?
+  specializations   String[]        // Array of specializations
+  
+  // Membership Information
+  membershipType    MembershipType  @default(REGULAR)
+  membershipNumber  String?         @unique
+  membershipStatus  MembershipStatus @default(PENDING)
+  joinDate          DateTime?
+  expiryDate        DateTime?
+  
+  // Verification
+  isVerified        Boolean         @default(false)
+  verifiedAt        DateTime?
+  verifiedBy        String?
+  
+  // Documents
+  cvUrl             String?
+  certificatesUrls  String[]
+  
+  createdAt         DateTime        @default(now())
+  updatedAt         DateTime        @updatedAt
+  
+  payments          Payment[]
+  certifications    Certification[]
+  education         ContinuingEducation[]
+  
+  @@index([licenseNumber])
+  @@index([membershipNumber])
+  @@index([membershipStatus])
+}
+
+enum LicenseType {
+  AME_CAT_A       // Category A - Mechanical
+  AME_CAT_B       // Category B - Avionics
+  AME_CAT_C       // Category C - Both
+  STUDENT
+  APPRENTICE
+}
+
+enum MembershipType {
+  STUDENT
+  REGULAR
+  SENIOR
+  LIFETIME
+  HONORARY
+}
+
+enum MembershipStatus {
+  PENDING
+  ACTIVE
+  EXPIRED
+  SUSPENDED
+  CANCELLED
+}
+
+// News and Announcements
+model Post {
+  id            String      @id @default(cuid())
+  title         String
+  slug          String      @unique
+  content       String      @db.Text
+  excerpt       String?
+  coverImage    String?
+  category      PostCategory
+  tags          String[]
+  
+  published     Boolean     @default(false)
+  publishedAt   DateTime?
+  
+  authorId      String
+  author        User        @relation(fields: [authorId], references: [id])
+  
+  views         Int         @default(0)
+  
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+  
+  comments      Comment[]
+  
+  @@index([slug])
+  @@index([category])
+  @@index([published])
+}
+
+enum PostCategory {
+  NEWS
+  ANNOUNCEMENT
+  TECHNICAL_BULLETIN
+  SAFETY_ALERT
+  EVENT
+  TRAINING
+  REGULATORY
+}
+
+// Comments
+model Comment {
+  id          String   @id @default(cuid())
+  content     String   @db.Text
+  
+  postId      String
+  post        Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
+  
+  authorId    String
+  author      User     @relation(fields: [authorId], references: [id])
+  
+  approved    Boolean  @default(false)
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  @@index([postId])
+  @@index([approved])
+}
+
+// Events Management
+model Event {
+  id              String   @id @default(cuid())
+  title           String
+  slug            String   @unique
+  description     String   @db.Text
+  type            EventType
+  
+  startDate       DateTime
+  endDate         DateTime
+  venue           String
+  address         String?
+  isVirtual       Boolean  @default(false)
+  meetingLink     String?
+  
+  capacity        Int?
+  registrationFee Decimal? @db.Decimal(10, 2)
+  registrationDeadline DateTime?
+  
+  coverImage      String?
+  attachments     String[]
+  
+  published       Boolean  @default(false)
+  
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  
+  registrations   EventRegistration[]
+  
+  @@index([slug])
+  @@index([startDate])
+  @@index([type])
+}
+
+enum EventType {
+  CONFERENCE
+  WORKSHOP
+  SEMINAR
+  WEBINAR
+  NETWORKING
+  TRAINING
+  AME_DAY
+  AGM
+}
+
+model EventRegistration {
+  id              String   @id @default(cuid())
+  
+  eventId         String
+  event           Event    @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  
+  userId          String
+  user            User     @relation(fields: [userId], references: [id])
+  
+  status          RegistrationStatus @default(PENDING)
+  paymentStatus   PaymentStatus @default(PENDING)
+  
+  attendanceMarked Boolean @default(false)
+  
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  
+  @@unique([eventId, userId])
+  @@index([eventId])
+  @@index([userId])
+}
+
+enum RegistrationStatus {
+  PENDING
+  CONFIRMED
+  CANCELLED
+  WAITLIST
+}
+
+// Training Resources
+model TrainingResource {
+  id            String   @id @default(cuid())
+  title         String
+  description   String   @db.Text
+  type          ResourceType
+  category      String
+  
+  fileUrl       String?
+  videoUrl      String?
+  externalLink  String?
+  
+  accessLevel   AccessLevel @default(MEMBERS_ONLY)
+  
+  downloadCount Int      @default(0)
+  
+  published     Boolean  @default(false)
+  
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  
+  @@index([type])
+  @@index([accessLevel])
+}
+
+enum ResourceType {
+  DOCUMENT
+  VIDEO
+  PRESENTATION
+  MANUAL
+  GUIDELINE
+  FORM
+  LINK
+}
+
+enum AccessLevel {
+  PUBLIC
+  MEMBERS_ONLY
+  VERIFIED_ONLY
+  ADMIN_ONLY
+}
+
+// Payments
+model Payment {
+  id              String   @id @default(cuid())
+  
+  memberId        String
+  member          Member   @relation(fields: [memberId], references: [id])
+  
+  amount          Decimal  @db.Decimal(10, 2)
+  currency        String   @default("UGX")
+  paymentType     PaymentType
+  paymentMethod   String?
+  
+  status          PaymentStatus
+  transactionId   String?  @unique
+  
+  description     String?
+  metadata        Json?
+  
+  paidAt          DateTime?
+  
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  
+  @@index([memberId])
+  @@index([status])
+  @@index([transactionId])
+}
+
+enum PaymentType {
+  MEMBERSHIP_FEE
+  RENEWAL_FEE
+  EVENT_FEE
+  TRAINING_FEE
+  CERTIFICATION_FEE
+}
+
+enum PaymentStatus {
+  PENDING
+  COMPLETED
+  FAILED
+  REFUNDED
+}
+
+// Job Board
+model JobPosting {
+  id              String   @id @default(cuid())
+  title           String
+  company         String
+  location        String
+  jobType         JobType
+  
+  description     String   @db.Text
+  requirements    String   @db.Text
+  salaryRange     String?
+  
+  contactEmail    String
+  applicationUrl  String?
+  
+  expiryDate      DateTime
+  
+  published       Boolean  @default(false)
+  featured        Boolean  @default(false)
+  
+  views           Int      @default(0)
+  
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  
+  @@index([published])
+  @@index([expiryDate])
+}
+
+enum JobType {
+  FULL_TIME
+  PART_TIME
+  CONTRACT
+  INTERNSHIP
+  APPRENTICESHIP
+}
+
+// Contact Form Submissions
+model ContactSubmission {
+  id          String   @id @default(cuid())
+  name        String
+  email       String
+  phone       String?
+  subject     String
+  message     String   @db.Text
+  
+  status      SubmissionStatus @default(NEW)
+  respondedAt DateTime?
+  
+  createdAt   DateTime @default(now())
+  
+  @@index([status])
+  @@index([createdAt])
+}
+
+enum SubmissionStatus {
+  NEW
+  IN_PROGRESS
+  RESOLVED
+  ARCHIVED
+}
+
+// Professional Certifications & Credentials
+model Certification {
+  id              String   @id @default(cuid())
+  memberId        String
+  member          Member   @relation(fields: [memberId], references: [id], onDelete: Cascade)
+  
+  certificationName String
+  certifyingBody  String      // e.g., EASA, CAAK, etc.
+  certificationNumber String?
+  certificationType CertificationType
+  
+  issueDate       DateTime
+  expiryDate      DateTime?
+  isActive        Boolean  @default(true)
+  
+  documentUrl     String?
+  
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  
+  @@index([memberId])
+  @@index([isActive])
+  @@index([expiryDate])
+}
+
+enum CertificationType {
+  AME_LICENSE
+  TYPE_RATING
+  SPECIALIZED_TRAINING
+  CPD_COURSE
+  REGULATORY_TRAINING
+  SAFETY_CERTIFICATION
+  OTHER
+}
+
+// Continuing Professional Development (CPD)
+model ContinuingEducation {
+  id              String   @id @default(cuid())
+  memberId        String
+  member          Member   @relation(fields: [memberId], references: [id], onDelete: Cascade)
+  
+  courseName      String
+  provider        String
+  type            EducationType
+  
+  startDate       DateTime
+  completionDate  DateTime?
+  hoursCompleted  Int?
+  
+  certificateUrl  String?
+  status          EducationStatus @default(IN_PROGRESS)
+  
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  
+  @@index([memberId])
+  @@index([status])
+}
+
+enum EducationType {
+  WORKSHOP
+  WEBINAR
+  ONLINE_COURSE
+  CONFERENCE
+  SEMINAR
+  SELF_STUDY
+  ON_THE_JOB_TRAINING
+}
+
+enum EducationStatus {
+  IN_PROGRESS
+  COMPLETED
+  PENDING
+  CANCELLED
+}
+
+// Advocacy Initiatives & News
+model AdvocacyInitiative {
+  id              String   @id @default(cuid())
+  title           String
+  slug            String   @unique
+  description     String   @db.Text
+  content         String   @db.Text
+  
+  category        AdvocacyCategory
+  priority        PriorityLevel    @default(MEDIUM)
+  status          AdvocacyStatus   @default(ACTIVE)
+  
+  targetAudience  String   // e.g., "Government", "Airlines", "Members"
+  relatedResources String[]
+  
+  published       Boolean  @default(false)
+  publishedAt     DateTime?
+  
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  
+  @@index([slug])
+  @@index([status])
+  @@index([priority])
+}
+
+enum AdvocacyCategory {
+  WORKPLACE_RIGHTS
+  WAGE_STANDARDS
+  SAFETY_STANDARDS
+  REGULATORY_REFORM
+  TRAINING_STANDARDS
+  JOB_PROTECTION
+  PROFESSIONAL_RECOGNITION
+  POLICY_ADVOCACY
+}
+
+enum PriorityLevel {
+  LOW
+  MEDIUM
+  HIGH
+  CRITICAL
+}
+
+enum AdvocacyStatus {
+  ACTIVE
+  PENDING_REVIEW
+  RESOLVED
+  ARCHIVED
+}
+
+// Regulatory Compliance & Updates
+model RegulatoryUpdate {
+  id              String   @id @default(cuid())
+  title           String
+  slug            String   @unique
+  description     String   @db.Text
+  content         String   @db.Text
+  
+  authority       String   // e.g., "CAAK", "GCAA", etc.
+  updateType      RegulatoryUpdateType
+  affectedAreas   String[]
+  
+  effectiveDate   DateTime
+  referenceUrl    String?
+  documentUrl     String?
+  
+  severity        SeverityLevel @default(INFORMATIONAL)
+  
+  published       Boolean  @default(false)
+  publishedAt     DateTime?
+  
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  
+  @@index([slug])
+  @@index([effectiveDate])
+  @@index([updateType])
+}
+
+enum RegulatoryUpdateType {
+  NEW_REGULATION
+  AMENDMENT
+  SAFETY_DIRECTIVE
+  POLICY_CHANGE
+  GUIDANCE
+  COMPLIANCE_ALERT
+}
+
+enum SeverityLevel {
+  INFORMATIONAL
+  WARNING
+  CRITICAL
+}
+
+// Member Benefits & Insurance
+model MemberBenefit {
+  id              String   @id @default(cuid())
+  name            String
+  slug            String   @unique
+  description     String   @db.Text
+  
+  benefitType     BenefitType
+  provider        String?
+  contactInfo     String?
+  
+  availableForRoles MembershipType[]
+  
+  published       Boolean  @default(false)
+  
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  
+  @@index([slug])
+  @@index([benefitType])
+}
+
+enum BenefitType {
+  HEALTH_INSURANCE
+  LIFE_INSURANCE
+  PROFESSIONAL_LIABILITY
+  LEGAL_SUPPORT
+  TRAINING_SUBSIDY
+  JOB_PLACEMENT
+  PEER_SUPPORT
+  CAREER_MENTORING
+  NETWORKING
+  PUBLICATIONS
+}
+
+// Salary & Compensation Benchmarking (Anonymous)
+model SalaryBenchmark {
+  id              String   @id @default(cuid())
+  
+  position        String
+  jobTitle        String
+  yearsOfExperience Int
+  
+  currency        String   @default("UGX")
+  salaryMin       Decimal  @db.Decimal(15, 2)
+  salaryMax       Decimal  @db.Decimal(15, 2)
+  salaryAverage   Decimal  @db.Decimal(15, 2)
+  
+  employerType    String   // e.g., "Domestic Airline", "International Airline", "MRO", "Ground Handler"
+  
+  dataPoints      Int      @default(1)
+  
+  publishedAt     DateTime @default(now())
+  
+  @@index([jobTitle])
+  @@index([yearsOfExperience])
+}
+
+// Enhanced Job Postings - Premium Member-Only
+model EnhancedJobPosting {
+  id              String   @id @default(cuid())
+  jobPostingId    String?  @unique
+  
+  title           String
+  company         String
+  location        String
+  jobType         JobType
+  
+  description     String   @db.Text
+  requirements    String   @db.Text
+  salaryMin       Decimal? @db.Decimal(15, 2)
+  salaryMax       Decimal? @db.Decimal(15, 2)
+  
+  contractEmail   String
+  applicationUrl  String?
+  
+  expiryDate      DateTime
+  
+  isMembersOnly   Boolean  @default(true)
+  isFeatured      Boolean  @default(false)
+  
+  published       Boolean  @default(false)
+  views           Int      @default(0)
+  applications    Int      @default(0)
+  
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  
+  @@index([published])
+  @@index([isMembersOnly])
+  @@index([expiryDate])
+}
+
+// Legal & Support Resources
+model LegalResource {
+  id              String   @id @default(cuid())
+  title           String
+  slug            String   @unique
+  description     String   @db.Text
+  content         String   @db.Text
+  
+  resourceType    LegalResourceType
+  relatedArea     String[]
+  
+  contactInfo     String?
+  externalLinks   String[]
+  
+  accessLevel     AccessLevel @default(MEMBERS_ONLY)
+  
+  published       Boolean  @default(false)
+  
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  
+  @@index([slug])
+  @@index([resourceType])
+}
+
+enum LegalResourceType {
+  LABOR_LAW
+  CONTRACT_TEMPLATES
+  DISPUTE_RESOLUTION
+  RIGHTS_INFORMATION
+  SAFETY_STANDARDS
+  COMPLIANCE_GUIDE
+  REPORTING_PROCEDURES
+}
+
