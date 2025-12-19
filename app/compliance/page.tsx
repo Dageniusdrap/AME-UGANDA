@@ -82,7 +82,7 @@ export default function CompliancePage() {
     },
   ];
 
-  const getSeverityColor = (severity) => {
+  const getSeverityColor = (severity: string) => {
     switch (severity) {
       case 'CRITICAL':
         return 'bg-red-100 text-red-800 border-red-300';
@@ -95,7 +95,7 @@ export default function CompliancePage() {
     }
   };
 
-  const getTypeIcon = (type) => {
+  const getTypeIcon = (type: string) => {
     const icons = {
       NEW_REGULATION: <FileText className="w-5 h-5" />,
       AMENDMENT: <TrendingUp className="w-5 h-5" />,
@@ -104,7 +104,7 @@ export default function CompliancePage() {
       GUIDANCE: <FileText className="w-5 h-5" />,
       COMPLIANCE_ALERT: <Bell className="w-5 h-5" />,
     };
-    return icons[type] || <FileText className="w-5 h-5" />;
+    return icons[type as keyof typeof icons] || <FileText className="w-5 h-5" />;
   };
 
   const filteredUpdates = activeFilter === 'all'
@@ -185,8 +185,8 @@ export default function CompliancePage() {
               key={filter}
               onClick={() => setActiveFilter(filter)}
               className={`px-4 py-2 rounded-lg font-semibold transition ${activeFilter === filter
-                  ? 'bg-blue-600 text-white'
-                  : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                ? 'bg-blue-600 text-white'
+                : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
                 }`}
             >
               {filter === 'all' ? 'All Updates' : `${filter} Priority`}
@@ -234,9 +234,6 @@ export default function CompliancePage() {
                     <a href={update.referenceUrl} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-700 font-semibold flex items-center gap-1 text-sm">
                       View Reference
                     </a>
-                    <button className="text-gray-600 hover:text-gray-700 p-2 hover:bg-gray-100 rounded transition">
-                      <Download className="w-4 h-4" />
-                    </button>
                   </div>
                 </div>
               </div>

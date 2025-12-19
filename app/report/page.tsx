@@ -34,39 +34,47 @@ export default function ReportPage() {
         );
     }
 
-    return (
-        <div className="min-h-screen bg-slate-50 pt-24 pb-12">
-            <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
 
-                {/* Header */}
-                <div className="text-center mb-12 animate-fade-in-up">
-                    <div className="inline-flex items-center space-x-2 bg-red-100 border border-red-200 text-red-700 px-4 py-1.5 rounded-full text-sm font-semibold mb-6">
+    return (
+        <div className="min-h-screen bg-slate-50">
+            {/* Hero Section */}
+            <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
+                <div className="absolute inset-0 z-0">
+                    <div className="absolute inset-0 bg-gradient-to-br from-red-950 via-slate-900 to-slate-900"></div>
+                    <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'url("https://www.transparenttextures.com/patterns/carbon-fibre.png")' }}></div>
+                </div>
+
+                <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
+                    <div className="inline-flex items-center space-x-2 bg-red-500/20 text-red-300 border border-red-500/30 px-4 py-1.5 rounded-full text-sm font-semibold mb-6 backdrop-blur-sm animate-fade-in-up">
                         <Lock className="w-4 h-4" />
                         <span>Secure & Confidential</span>
                     </div>
-                    <h1 className="text-4xl md:text-5xl font-bold text-slate-900 mb-6">Whistleblower Portal</h1>
-                    <p className="text-xl text-slate-600 max-w-2xl mx-auto">
-                        Report unfair hiring practices, wage theft, or safety violations.
-                        We protect our members and boldy challenge systemic issues.
+                    <h1 className="text-5xl lg:text-7xl font-bold mb-8 tracking-tight leading-tight animate-fade-in-up delay-100">
+                        Whistleblower <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-amber-200">Portal</span>
+                    </h1>
+                    <p className="text-xl text-slate-300 mb-10 leading-relaxed max-w-2xl mx-auto animate-fade-in-up delay-200">
+                        Report unfair hiring practices, wage theft, or safety violations. We protect our members and boldly challenge systemic issues.
                     </p>
                 </div>
+            </section>
 
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-20 relative z-20 pb-20">
                 <div className="grid md:grid-cols-3 gap-8">
                     {/* Sidebar Info */}
                     <div className="md:col-span-1 space-y-6">
-                        <div className="bg-aviation-900 text-white p-8 rounded-3xl shadow-xl">
-                            <Shield className="w-12 h-12 text-aviation-400 mb-6" />
-                            <h3 className="text-xl font-bold mb-4">Your Protection is Paramount</h3>
-                            <p className="text-aviation-100 text-sm leading-relaxed mb-6">
+                        <div className="bg-white p-8 rounded-3xl shadow-xl border border-slate-100">
+                            <Shield className="w-12 h-12 text-aviation-600 mb-6" />
+                            <h3 className="text-xl font-bold text-slate-900 mb-4">Your Protection is Paramount</h3>
+                            <p className="text-slate-600 text-sm leading-relaxed mb-6">
                                 Aviation Engineers Uganda utilizes industry-standard encryption. We do not log IP addresses for anonymous reports.
                             </p>
-                            <div className="border-t border-white/10 pt-6">
-                                <h4 className="font-semibold text-white mb-2">What happens next?</h4>
-                                <ol className="text-sm text-aviation-200 space-y-3 list-decimal pl-4">
+                            <div className="border-t border-slate-100 pt-6">
+                                <h4 className="font-semibold text-slate-900 mb-2">What happens next?</h4>
+                                <ol className="text-sm text-slate-500 space-y-3 list-decimal pl-4">
                                     <li>Legal team review (24hrs)</li>
                                     <li>Assessment of violation</li>
                                     <li>Strategic action plan</li>
-                                    <li>Regulatory body notification (if applicable)</li>
+                                    <li>Regulatory body notification</li>
                                 </ol>
                             </div>
                         </div>

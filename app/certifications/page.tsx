@@ -316,9 +316,6 @@ export default function CertificationsPage() {
                         <span>{resource.downloads} downloads</span>
                       </div>
                     </div>
-                    <button className="bg-aviation-600 text-white p-3 rounded-lg hover:bg-aviation-700 transition">
-                      <Download className="w-5 h-5" />
-                    </button>
                   </div>
                 </div>
               ))}

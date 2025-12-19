@@ -1,12 +1,7 @@
 import { NextResponse } from "next/server";
 
-// TEMPORARILY DISABLED FOR MOCK MODE
-// import { authMiddleware } from "@clerk/nextjs/server";
-
-// export default authMiddleware({
-//   // ... (original config preserved in comments)
-// });
-
+// Valid Clerk keys are required for the real middleware.
+// Reverting to mock mode until KEYS are updated in .env.local
 export function middleware() {
     return NextResponse.next();
 }

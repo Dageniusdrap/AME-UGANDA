@@ -76,7 +76,7 @@ export default function AdvocacyPage() {
     },
   ];
 
-  const getPriorityColor = (priority) => {
+  const getPriorityColor = (priority: string) => {
     switch (priority) {
       case 'CRITICAL': return 'bg-red-100 text-red-800 border-red-300';
       case 'HIGH': return 'bg-orange-100 text-orange-800 border-orange-300';
@@ -85,7 +85,7 @@ export default function AdvocacyPage() {
     }
   };
 
-  const getCategoryIcon = (category) => {
+  const getCategoryIcon = (category: string) => {
     const icons = {
       WORKPLACE_RIGHTS: <Shield className="w-5 h-5" />,
       WAGE_STANDARDS: <TrendingUp className="w-5 h-5" />,
@@ -96,7 +96,7 @@ export default function AdvocacyPage() {
       PROFESSIONAL_RECOGNITION: <Zap className="w-5 h-5" />,
       POLICY_ADVOCACY: <FileText className="w-5 h-5" />,
     };
-    return icons[category] || <Shield className="w-5 h-5" />;
+    return icons[category as keyof typeof icons] || <Shield className="w-5 h-5" />;
   };
 
   const filteredInitiatives = activeTab === 'all'
@@ -129,9 +129,9 @@ export default function AdvocacyPage() {
               <Link href="/sign-up" className="bg-aviation-600 text-white px-8 py-4 rounded-full font-bold shadow-lg shadow-aviation-600/25 hover:bg-aviation-500 hover:scale-105 transition-all duration-300">
                 Join the Movement
               </Link>
-              <button className="bg-white/5 text-white border border-white/10 px-8 py-4 rounded-full font-bold hover:bg-white/10 transition-all duration-300 backdrop-blur-sm">
+              <Link href="/about" className="bg-white/5 text-white border border-white/10 px-8 py-4 rounded-full font-bold hover:bg-white/10 transition-all duration-300 backdrop-blur-sm flex items-center justify-center">
                 Read Our Manifesto
-              </button>
+              </Link>
             </div>
           </div>
         </div>
@@ -246,9 +246,9 @@ export default function AdvocacyPage() {
             <Link href="/sign-up" className="bg-white text-aviation-600 px-8 py-3 rounded-lg font-bold hover:bg-aviation-50 transition">
               Become a Member
             </Link>
-            <button className="border-2 border-white text-white px-8 py-3 rounded-lg font-bold hover:bg-white/10 transition">
+            <Link href="/contact" className="border-2 border-white text-white px-8 py-3 rounded-lg font-bold hover:bg-white/10 transition flex items-center justify-center">
               Contact Us
-            </button>
+            </Link>
           </div>
         </div>
       </section>

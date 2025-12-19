@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { Heart, Shield, Briefcase, AlertCircle, Users, FileText, CheckCircle, Phone, Mail, ExternalLink } from 'lucide-react';
 
 export default function MemberProtectionPage() {
-  const [expandedBenefit, setExpandedBenefit] = useState(null);
+  const [expandedBenefit, setExpandedBenefit] = useState<string | null>(null);
 
   const benefits = [
     {
@@ -67,7 +67,7 @@ export default function MemberProtectionPage() {
       id: 'placement',
       name: 'Job Placement Services',
       type: 'JOB_PLACEMENT',
-      provider: 'AME Career Services',
+      provider: 'AEU Career Services',
       description: 'Exclusive access to member-only premium job opportunities.',
       details: 'Resume review, interview coaching, and career counseling included.',
       contactEmail: 'careers@ame-uganda.org',
@@ -262,6 +262,15 @@ export default function MemberProtectionPage() {
                   </li>
                 ))}
               </ul>
+              <Link
+                href={`/sign-up?tier=${tier.name.toLowerCase()}`}
+                className={`block w-full text-center py-2 rounded-lg font-bold transition ${tier.featured
+                  ? 'bg-white text-aviation-600 hover:bg-gray-100'
+                  : 'bg-aviation-600 text-white hover:bg-aviation-700'
+                  }`}
+              >
+                Join Now
+              </Link>
             </div>
           ))}
         </div>

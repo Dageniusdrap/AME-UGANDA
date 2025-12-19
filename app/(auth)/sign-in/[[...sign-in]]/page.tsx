@@ -4,12 +4,12 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Loader2 } from "lucide-react";
 
-export default function SignUpPage() {
+export default function SignInPage() {
     const router = useRouter();
     const [isLoading, setIsLoading] = useState(false);
     const [socialLoading, setSocialLoading] = useState<string | null>(null);
 
-    const handleRegister = (e: React.FormEvent) => {
+    const handleLogin = (e: React.FormEvent) => {
         e.preventDefault();
         setIsLoading(true);
 
@@ -34,35 +34,25 @@ export default function SignUpPage() {
             <div className="w-full max-w-md space-y-8">
                 <div className="text-center mb-8">
                     <h1 className="text-3xl font-bold text-gray-900 tracking-tight">
-                        Join Aviation Engineers Uganda
+                        Welcome Back
                     </h1>
                     <p className="text-gray-600 mt-2 text-sm">
-                        Become part of Uganda's premier aviation maintenance community
+                        Sign in to access your dashboard and member resources
                     </p>
                 </div>
 
-                {/* <SignUp appearance={{...}} /> */}
-                {/* Mock Sign Up Form for Preview */}
                 <div className="bg-white p-8 rounded-2xl shadow-2xl border border-gray-100">
-                    <form className="space-y-5" onSubmit={handleRegister}>
-                        <div className="grid grid-cols-2 gap-4">
-                            <div>
-                                <label className="block text-sm font-semibold text-gray-700 mb-1.5">First Name</label>
-                                <input required type="text" className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-aviation-500 focus:border-aviation-500 transition-all outline-none" placeholder="John" />
-                            </div>
-                            <div>
-                                <label className="block text-sm font-semibold text-gray-700 mb-1.5">Last Name</label>
-                                <input required type="text" className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-aviation-500 focus:border-aviation-500 transition-all outline-none" placeholder="Doe" />
-                            </div>
-                        </div>
-
+                    <form className="space-y-6" onSubmit={handleLogin}>
                         <div>
                             <label className="block text-sm font-semibold text-gray-700 mb-1.5">Email Address</label>
                             <input required type="email" className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-aviation-500 focus:border-aviation-500 transition-all outline-none" placeholder="john.doe@example.com" />
                         </div>
 
                         <div>
-                            <label className="block text-sm font-semibold text-gray-700 mb-1.5">Password</label>
+                            <div className="flex justify-between items-center mb-1.5">
+                                <label className="block text-sm font-semibold text-gray-700">Password</label>
+                                <a href="#" className="text-sm text-aviation-600 hover:text-aviation-700 font-medium">Forgot Password?</a>
+                            </div>
                             <input required type="password" className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-aviation-500 focus:border-aviation-500 transition-all outline-none" placeholder="••••••••" />
                         </div>
 
@@ -74,10 +64,10 @@ export default function SignUpPage() {
                             {isLoading ? (
                                 <>
                                     <Loader2 className="w-5 h-5 mr-2 animate-spin" />
-                                    Creating Account...
+                                    Signing In...
                                 </>
                             ) : (
-                                "Create Account"
+                                "Sign In"
                             )}
                         </button>
                     </form>
@@ -114,9 +104,9 @@ export default function SignUpPage() {
                 </div>
 
                 <p className="text-center text-sm text-gray-600 mt-4">
-                    Already a member?{' '}
-                    <a href="/sign-in" className="text-aviation-600 hover:underline font-semibold">
-                        Sign in here
+                    Not a member yet?{' '}
+                    <a href="/sign-up" className="text-aviation-600 hover:underline font-semibold">
+                        Join AEU today
                     </a>
                 </p>
             </div>

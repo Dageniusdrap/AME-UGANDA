@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 import { FileText, Download, ExternalLink, Book } from 'lucide-react';
 
 export default function ResourcesPage() {
@@ -91,9 +92,9 @@ export default function ResourcesPage() {
                                 <p className="text-gray-600">Prepare for your CAA license exams with our practice quizzes.</p>
                             </div>
                         </div>
-                        <button className="bg-aviation-600 text-white px-6 py-3 rounded-lg font-bold hover:bg-aviation-700 transition">
+                        <Link href="/certifications" className="bg-aviation-600 text-white px-6 py-3 rounded-lg font-bold hover:bg-aviation-700 transition">
                             Access Exam Portal
-                        </button>
+                        </Link>
                     </div>
                 </div>
             </section>

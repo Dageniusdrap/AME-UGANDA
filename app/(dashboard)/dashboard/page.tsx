@@ -3,22 +3,22 @@ import { redirect } from 'next/navigation';
 import { db } from '@/lib/db';
 
 export default async function DashboardPage() {
-    const user = await currentUser();
+    // MOCK AUTHENTICATION - Keys are invalid, using mock data for development.
+    const user = { id: 'mock_user_id', firstName: 'Engineer' };
 
-    if (!user) {
-        redirect('/sign-in');
-    }
-
-    // Fetch user's member profile
-    const member = await db.user.findUnique({
-        where: { clerkId: user.id },
-        include: { member: true },
-    });
+    // Mock Member Data
+    const member = {
+        member: {
+            membershipStatus: 'ACTIVE',
+            licenseNumber: 'AME-2024-001',
+            membershipType: 'REGULAR'
+        }
+    };
 
     return (
         <div className="container mx-auto py-10">
             <h1 className="text-3xl font-bold mb-6">
-                Welcome, {user.firstName}!
+                Welcome, {user.firstName} (Preview Mode)!
             </h1>
 
             {member?.member ? (

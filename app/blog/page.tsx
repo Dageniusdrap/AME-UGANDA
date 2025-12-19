@@ -15,7 +15,7 @@ export default function BlogPage() {
         {
             id: 2,
             title: 'Reflections on the Aviation Safety Summit',
-            excerpt: 'Key takeaways from our annual gathering of maintenance professionals in Entebbe.',
+            excerpt: 'Key takeaways from our annual gathering of aircraft maintenance, aeronautical, and aerospace engineers in Entebbe.',
             date: 'Nov 28, 2024',
             category: 'Events',
             author: 'Sarah N.'
@@ -74,7 +74,7 @@ export default function BlogPage() {
                             <div className="bg-aviation-800 text-white rounded-2xl p-8 shadow-xl">
                                 <div className="flex items-center space-x-3 mb-6">
                                     <Mail className="w-6 h-6 text-aviation-300" />
-                                        <h3 className="text-xl font-bold">The Aviation Engineers Newsletter</h3>
+                                    <h3 className="text-xl font-bold">The Aviation Engineers Newsletter</h3>
                                 </div>
                                 <p className="text-aviation-200 mb-6">
                                     Get the latest regulatory updates, job alerts, and engineering insights delivered to your inbox monthly.

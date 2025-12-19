@@ -255,12 +255,12 @@ export default function HomePage() {
                     </li>
                   ))}
                 </ul>
-                <button className={`w-full py-4 rounded-xl font-bold transition-all duration-300 ${tier.recommended
+                <Link href={`/sign-up?plan=${tier.title.toLowerCase()}`} className={`w-full py-4 rounded-xl font-bold transition-all duration-300 block text-center ${tier.recommended
                   ? 'bg-aviation-600 text-white hover:bg-aviation-700 shadow-lg shadow-aviation-200'
                   : 'bg-slate-100 text-slate-900 hover:bg-slate-200'
                   }`}>
                   Choose {tier.title}
-                </button>
+                </Link>
               </div>
             ))}
           </div>
@@ -314,7 +314,7 @@ export default function HomePage() {
                 <span className="text-xl font-bold text-white">Aviation Engineers Uganda</span>
               </Link>
               <p className="text-slate-400 max-w-sm leading-relaxed mb-6">
-                The premier body for Aviation Engineers and Maintenance Professionals in Uganda. Promoting safety, standards, and professional growth.
+                The premier body for Aircraft Maintenance, Aeronautical, and Aerospace Engineers in Uganda. Promoting safety, standards, and professional growth.
               </p>
               <div className="flex space-x-4">
                 {[Facebook, Twitter, Linkedin].map((Icon, i) => (
@@ -328,9 +328,11 @@ export default function HomePage() {
             <div>
               <h4 className="text-white font-bold mb-6">Quick Links</h4>
               <ul className="space-y-4">
-                {['About Us', 'Membership', 'Events', 'News', 'Contact'].map((item) => (
-                  <li key={item}><a href="#" className="hover:text-aviation-400 transition-colors">{item}</a></li>
-                ))}
+                <li><Link href="/about" className="hover:text-aviation-400 transition-colors">About Us</Link></li>
+                <li><Link href="/member-protection" className="hover:text-aviation-400 transition-colors">Membership Benefits</Link></li>
+                <li><Link href="/#events" className="hover:text-aviation-400 transition-colors">Events</Link></li>
+                <li><Link href="/blog" className="hover:text-aviation-400 transition-colors">News & Blog</Link></li>
+                <li><Link href="/contact" className="hover:text-aviation-400 transition-colors">Contact Us</Link></li>
               </ul>
             </div>
 

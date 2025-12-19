@@ -61,7 +61,7 @@ export default function MemberDirectoryPage() {
               Member <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-sky-200">Directory</span>
             </h1>
             <p className="text-xl text-slate-300 mb-10 leading-relaxed max-w-2xl animate-fade-in-up delay-200">
-              Connect with verified aircraft maintenance professionals and aerospace engineers across Uganda and the region. Build your network with trusted peers.
+              Connect with verified Aircraft Maintenance, Aeronautical, and Aerospace Engineers across Uganda and the region. Build your network with trusted peers.
             </p>
           </div>
         </div>
@@ -119,9 +119,6 @@ export default function MemberDirectoryPage() {
             </div>
           </div>
 
-          <p className="text-sm text-gray-600 mt-4">
-            Showing {filteredMembers.length} of {members.length} members
-          </p>
         </div>
       </section>
 
@@ -213,7 +210,7 @@ export default function MemberDirectoryPage() {
             ))}
           </div>
         </div>
-      </section>
-    </div>
+      </section >
+    </div >
   );
 }
