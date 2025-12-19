@@ -3,7 +3,7 @@ import { db } from '@/lib/db';
 import { UserRole } from '@prisma/client';
 
 export async function getCurrentUser() {
-    const { userId } = auth();
+    const { userId } = await auth();
 
     if (!userId) {
         return null;

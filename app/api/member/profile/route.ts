@@ -4,7 +4,7 @@ import { db } from '@/lib/db';
 
 export async function GET(req: Request) {
     try {
-        const { userId } = auth();
+        const { userId } = await auth();
 
         if (!userId) {
             return new NextResponse('Unauthorized', { status: 401 });

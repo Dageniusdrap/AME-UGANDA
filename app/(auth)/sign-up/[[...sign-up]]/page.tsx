@@ -3,15 +3,40 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Loader2 } from "lucide-react";
+import { SignUp } from "@clerk/nextjs";
 
 export default function SignUpPage() {
     const router = useRouter();
     const [isLoading, setIsLoading] = useState(false);
     const [socialLoading, setSocialLoading] = useState<string | null>(null);
+    const [error, setError] = useState<string | null>(null);
+
+    const publishableKey = process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY;
+    const isMock = !publishableKey || publishableKey.includes('mock');
+
+    // If we have real keys, use the Enterprise-grade Clerk Component
+    if (!isMock) {
+        console.log("Rendering Real Clerk SignUp");
+        return (
+            <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-aviation-50 to-aviation-100 py-12 px-4 sm:px-6 lg:px-8">
+                <SignUp
+                    fallbackRedirectUrl="/onboarding"
+                    appearance={{
+                        elements: {
+                            card: 'shadow-2xl border border-gray-100 rounded-2xl',
+                            formButtonPrimary: 'bg-aviation-600 hover:bg-aviation-700',
+                            footerActionLink: 'text-aviation-600 hover:text-aviation-700'
+                        }
+                    }}
+                />
+            </div>
+        );
+    }
 
     const handleRegister = (e: React.FormEvent) => {
         e.preventDefault();
         setIsLoading(true);
+        setError(null);
 
         // Simulate network request
         setTimeout(() => {
@@ -22,10 +47,12 @@ export default function SignUpPage() {
 
     const handleSocialLogin = (provider: string) => {
         setSocialLoading(provider);
-        // Simulate OAuth redirect
+        setError(null);
+
+        // Simulate OAuth restriction
         setTimeout(() => {
             setSocialLoading(null);
-            router.push('/dashboard');
+            setError(`${provider.charAt(0).toUpperCase() + provider.slice(1)} registration is unavailable in this preview.`);
         }, 1500);
     };
 
@@ -41,9 +68,14 @@ export default function SignUpPage() {
                     </p>
                 </div>
 
-                {/* <SignUp appearance={{...}} /> */}
                 {/* Mock Sign Up Form for Preview */}
                 <div className="bg-white p-8 rounded-2xl shadow-2xl border border-gray-100">
+                    {error && (
+                        <div className="mb-6 p-4 bg-red-50 border border-red-100 text-red-600 text-sm rounded-lg flex items-center">
+                            <span className="mr-2">!</span> {error}
+                        </div>
+                    )}
+
                     <form className="space-y-5" onSubmit={handleRegister}>
                         <div className="grid grid-cols-2 gap-4">
                             <div>

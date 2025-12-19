@@ -4,11 +4,13 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Plane, Menu, X, ChevronDown } from 'lucide-react';
+import { useUser, UserButton } from "@clerk/nextjs";
 
 export default function Navbar() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
     const pathname = usePathname();
+    const { isSignedIn, user } = useUser();
     const isHome = pathname === '/';
 
     useEffect(() => {
@@ -81,23 +83,50 @@ export default function Navbar() {
                             </div>
                         </div>
 
-                        <NavLink href="/blog" active={pathname === '/blog'} scrolled={effectiveIsScrolled}>News</NavLink>
+                        {/* Media Dropdown */}
+                        <div className="group relative px-3 py-2">
+                            <button className={`flex items-center space-x-1 text-sm font-medium transition-colors duration-200 ${effectiveIsScrolled ? 'text-gray-600 hover:text-aviation-600' : 'text-white/90 hover:text-white'}`}>
+                                <span>Media</span>
+                                <ChevronDown className="w-4 h-4 opacity-70 group-hover:rotate-180 transition-transform duration-300" />
+                            </button>
+                            <div className="absolute top-full left-0 w-60 pt-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
+                                <div className="bg-white/90 backdrop-blur-2xl rounded-2xl shadow-2xl border border-white/20 overflow-hidden p-1.5 ring-1 ring-black/5">
+                                    <DropdownItem href="/blog" title="Latest News" desc="Industry Updates & Blog" />
+                                    <DropdownItem href="/newsletters" title="Newsletters" desc="Official Publications & Archives" />
+                                    <DropdownItem href="/downloads" title="Resources" desc="CAA Forms & Technical Logs" />
+                                </div>
+                            </div>
+                        </div>
                         <NavLink href="/contact" active={pathname === '/contact'} scrolled={effectiveIsScrolled}>Contact</NavLink>
 
                         <div className="flex items-center space-x-3 pl-6 ml-2 border-l border-gray-200/20">
-                            <Link
-                                href="/sign-in"
-                                className={`text-sm font-medium hover:text-aviation-400 transition-colors ${effectiveIsScrolled ? 'text-gray-900' : 'text-white'
-                                    }`}
-                            >
-                                Log In
-                            </Link>
-                            <Link
-                                href="/sign-up"
-                                className="bg-aviation-600 text-white px-5 py-2 rounded-full text-sm font-semibold shadow-lg shadow-aviation-600/20 hover:bg-aviation-500 hover:shadow-aviation-500/40 hover:-translate-y-0.5 transition-all duration-300 transform"
-                            >
-                                Join Now
-                            </Link>
+                            {isSignedIn ? (
+                                <div className="flex items-center gap-3">
+                                    <Link
+                                        href="/dashboard"
+                                        className={`text-sm font-medium hover:text-aviation-400 transition-colors ${effectiveIsScrolled ? 'text-gray-900' : 'text-white'}`}
+                                    >
+                                        Dashboard
+                                    </Link>
+                                    <UserButton afterSignOutUrl="/" />
+                                </div>
+                            ) : (
+                                <>
+                                    <Link
+                                        href="/sign-in"
+                                        className={`text-sm font-medium hover:text-aviation-400 transition-colors ${effectiveIsScrolled ? 'text-gray-900' : 'text-white'
+                                            }`}
+                                    >
+                                        Log In
+                                    </Link>
+                                    <Link
+                                        href="/sign-up"
+                                        className="bg-aviation-600 text-white px-5 py-2 rounded-full text-sm font-semibold shadow-lg shadow-aviation-600/20 hover:bg-aviation-500 hover:shadow-aviation-500/40 hover:-translate-y-0.5 transition-all duration-300 transform"
+                                    >
+                                        Join Now
+                                    </Link>
+                                </>
+                            )}
                         </div>
                     </div>
 
@@ -137,16 +166,38 @@ export default function Navbar() {
                         <MobileNavLink href="/member-directory" onClick={() => setIsMenuOpen(false)}>Directory</MobileNavLink>
                     </div>
 
-                    <MobileNavLink href="/blog" onClick={() => setIsMenuOpen(false)}>News</MobileNavLink>
+                    <div className="py-2">
+                        <p className="px-4 text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">Media</p>
+                        <MobileNavLink href="/blog" onClick={() => setIsMenuOpen(false)}>Latest News</MobileNavLink>
+                        <MobileNavLink href="/newsletters" onClick={() => setIsMenuOpen(false)}>Newsletters</MobileNavLink>
+                        <MobileNavLink href="/downloads" onClick={() => setIsMenuOpen(false)}>Resources</MobileNavLink>
+                    </div>
                     <MobileNavLink href="/contact" onClick={() => setIsMenuOpen(false)}>Contact</MobileNavLink>
 
                     <div className="pt-6 border-t border-gray-100 space-y-3 px-2">
-                        <Link href="/sign-in" className="block text-center text-gray-600 font-medium py-2 hover:text-aviation-600">
-                            Log In
-                        </Link>
-                        <Link href="/sign-up" className="block w-full bg-aviation-600 text-white text-center py-3 rounded-xl font-semibold shadow-lg hover:bg-aviation-700 transition-colors">
-                            Join Now
-                        </Link>
+                        {isSignedIn ? (
+                            <div className="flex flex-col items-center gap-4">
+                                <Link
+                                    href="/dashboard"
+                                    onClick={() => setIsMenuOpen(false)}
+                                    className="block text-center text-gray-600 font-medium py-2 hover:text-aviation-600"
+                                >
+                                    My Dashboard
+                                </Link>
+                                <div className="flex justify-center">
+                                    <UserButton afterSignOutUrl="/" />
+                                </div>
+                            </div>
+                        ) : (
+                            <>
+                                <Link href="/sign-in" className="block text-center text-gray-600 font-medium py-2 hover:text-aviation-600">
+                                    Log In
+                                </Link>
+                                <Link href="/sign-up" className="block w-full bg-aviation-600 text-white text-center py-3 rounded-xl font-semibold shadow-lg hover:bg-aviation-700 transition-colors">
+                                    Join Now
+                                </Link>
+                            </>
+                        )}
                     </div>
                 </div>
             </div >

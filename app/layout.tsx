@@ -1,12 +1,14 @@
-import { ClerkProvider } from '@clerk/nextjs';
-import { dark } from '@clerk/themes';
+import SafeClerkProvider from '@/components/auth/safe-clerk-provider';
 import Navbar from '@/components/shared/navbar';
 import './globals.css';
+import '../app/global-error'; // Import to ensure it's registered if needed
 
 export const metadata = {
   title: 'Aviation Engineers Uganda',
   description: 'The premier body for Aircraft Maintenance, Aeronautical, and Aerospace Engineers Uganda',
 };
+
+import { Toaster } from 'sonner';
 
 export default function RootLayout({
   children,
@@ -14,13 +16,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    // <ClerkProvider ...>  <-- Disabled due to invalid Publishable Key
-    <html lang="en" suppressHydrationWarning>
-      <body suppressHydrationWarning>
-        <Navbar />
-        {children}
-      </body>
-    </html>
-    // </ClerkProvider>
+    <SafeClerkProvider>
+      <html lang="en" suppressHydrationWarning>
+        <body suppressHydrationWarning>
+          <Navbar />
+          {children}
+          <Toaster position="top-center" richColors />
+        </body>
+      </html>
+    </SafeClerkProvider>
   );
 }

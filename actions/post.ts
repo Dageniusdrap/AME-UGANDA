@@ -50,7 +50,7 @@ export async function getPublishedPosts(category?: string) {
         const posts = await db.post.findMany({
             where: {
                 published: true,
-                ...(category && { category }),
+                ...(category && { category: category as any }),
             },
             include: {
                 author: {
