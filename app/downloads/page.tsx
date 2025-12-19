@@ -40,6 +40,7 @@ export default function DownloadsPage() {
             description: "Membership applications, renewal forms, and benevolent fund requests.",
             icon: FileCheck,
             items: [
+                { id: 'asc-0', title: 'Constitution & Bylaws', size: '1.5 MB', type: 'PDF' },
                 { id: 'asc-1', title: 'Full Membership Application', size: '1.2 MB', type: 'PDF' },
                 { id: 'asc-2', title: 'Benevolent Fund Claim Form', size: '850 KB', type: 'PDF' },
                 { id: 'asc-3', title: 'Proxy Vote Form 2025', size: '120 KB', type: 'PDF' }
