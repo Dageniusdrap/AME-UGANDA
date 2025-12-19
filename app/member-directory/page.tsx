@@ -1,81 +1,15 @@
 'use client';
 
 import React, { useState } from 'react';
+import Link from 'next/link';
 import { Search, MapPin, Award, Briefcase, Filter, ChevronDown, Users } from 'lucide-react';
+
+import { members } from '@/lib/mock-data';
 
 export default function MemberDirectoryPage() {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedSpecialization, setSelectedSpecialization] = useState('all');
   const [selectedLicense, setSelectedLicense] = useState('all');
-
-  const members = [
-    {
-      id: 1,
-      name: 'James Kwizera',
-      title: 'Senior Aircraft Maintenance Engineer',
-      location: 'Entebbe, Uganda',
-      license: 'AME_CAT_A',
-      specializations: ['Mechanical Systems', 'Turbine Engines'],
-      yearsExperience: 15,
-      verified: true,
-      avatar: '👨‍💼',
-    },
-    {
-      id: 2,
-      name: 'Sarah Ouma',
-      title: 'Avionics Technician',
-      location: 'Kampala, Uganda',
-      license: 'AME_CAT_B',
-      specializations: ['Avionics', 'Flight Control Systems'],
-      yearsExperience: 8,
-      verified: true,
-      avatar: '👩‍💼',
-    },
-    {
-      id: 3,
-      name: 'Moses Kamau',
-      title: 'Aircraft Maintenance Manager',
-      location: 'Jinja, Uganda',
-      license: 'AME_CAT_C',
-      specializations: ['Maintenance Management', 'Hydraulics', 'Electrical'],
-      yearsExperience: 20,
-      verified: true,
-      avatar: '👨‍💼',
-    },
-    {
-      id: 4,
-      name: 'Florence Mwangi',
-      title: 'Junior AME - Trainee',
-      location: 'Kampala, Uganda',
-      license: 'STUDENT',
-      specializations: ['General Maintenance', 'Safety'],
-      yearsExperience: 0,
-      verified: false,
-      avatar: '👩‍🎓',
-    },
-    {
-      id: 5,
-      name: 'Peter Koech',
-      title: 'Structural Repair Specialist',
-      location: 'Entebbe, Uganda',
-      license: 'AME_CAT_A',
-      specializations: ['Composite Repair', 'Sheet Metal', 'Structures'],
-      yearsExperience: 12,
-      verified: true,
-      avatar: '👨‍💼',
-    },
-    {
-      id: 6,
-      name: 'Jane Mwangi',
-      title: 'Engine Overhaul Specialist',
-      location: 'Dar es Salaam, Tanzania',
-      license: 'AME_CAT_A',
-      specializations: ['Turbine Engines', 'Piston Engines'],
-      yearsExperience: 18,
-      verified: true,
-      avatar: '👩‍💼',
-    },
-  ];
 
   const specializations = [
     'All',
@@ -235,9 +169,12 @@ export default function MemberDirectoryPage() {
                   </div>
                 </div>
 
-                <button className="w-full bg-gradient-to-r from-aviation-600 to-aviation-700 text-white py-2.5 rounded-lg font-bold shadow-lg shadow-aviation-600/20 hover:shadow-aviation-600/30 hover:scale-[1.02] transition-all duration-300 border border-aviation-600/20">
+                <Link
+                  href={`/member-directory/${member.id}`}
+                  className="block w-full text-center bg-gradient-to-r from-aviation-600 to-aviation-700 text-white py-2.5 rounded-lg font-bold shadow-lg shadow-aviation-600/20 hover:shadow-aviation-600/30 hover:scale-[1.02] transition-all duration-300 border border-aviation-600/20"
+                >
                   Connect
-                </button>
+                </Link>
               </div>
             ))}
           </div>
