@@ -57,8 +57,8 @@ export default function Navbar() {
                                 <span>Membership</span>
                                 <ChevronDown className="w-4 h-4 opacity-70 group-hover:rotate-180 transition-transform duration-300" />
                             </button>
-                            <div className="absolute top-full left-0 w-56 pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform translate-y-2 group-hover:translate-y-0">
-                                <div className="bg-white/95 backdrop-blur-xl rounded-2xl shadow-xl border border-gray-100 overflow-hidden p-1">
+                            <div className="absolute top-full left-0 w-60 pt-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
+                                <div className="bg-white/90 backdrop-blur-2xl rounded-2xl shadow-2xl border border-white/20 overflow-hidden p-1.5 ring-1 ring-black/5">
                                     <DropdownItem href="/member-protection" title="Benefits" desc="Insurance & Legal Support" />
                                     <DropdownItem href="/advocacy" title="Advocacy" desc="Representation & Rights" />
                                     <DropdownItem href="/jobs" title="Career Center" desc="Latest Job Opportunities" />
@@ -72,8 +72,8 @@ export default function Navbar() {
                                 <span>Professional</span>
                                 <ChevronDown className="w-4 h-4 opacity-70 group-hover:rotate-180 transition-transform duration-300" />
                             </button>
-                            <div className="absolute top-full left-0 w-56 pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform translate-y-2 group-hover:translate-y-0">
-                                <div className="bg-white/95 backdrop-blur-xl rounded-2xl shadow-xl border border-gray-100 overflow-hidden p-1">
+                            <div className="absolute top-full left-0 w-60 pt-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
+                                <div className="bg-white/90 backdrop-blur-2xl rounded-2xl shadow-2xl border border-white/20 overflow-hidden p-1.5 ring-1 ring-black/5">
                                     <DropdownItem href="/certifications" title="Certifications" desc="Track your CPD" />
                                     <DropdownItem href="/compliance" title="Compliance" desc="Standards & Regulations" />
                                     <DropdownItem href="/member-directory" title="Directory" desc="Find Professionals" />
@@ -170,9 +170,9 @@ function NavLink({ href, children, active, scrolled }: { href: string; children:
 
 function DropdownItem({ href, title, desc }: { href: string; title: string; desc: string }) {
     return (
-        <Link href={href} className="block px-4 py-3 hover:bg-gray-50 transition-colors group">
-            <p className="text-sm font-medium text-gray-900 group-hover:text-aviation-600">{title}</p>
-            <p className="text-xs text-gray-500 group-hover:text-aviation-500/80">{desc}</p>
+        <Link href={href} className="block px-4 py-3 hover:bg-aviation-50/50 transition-all duration-300 group rounded-xl mx-0.5 my-1">
+            <p className="text-[13px] font-bold text-slate-700 group-hover:text-aviation-700 tracking-wide transition-colors">{title}</p>
+            <p className="text-[10px] text-slate-500 font-medium group-hover:text-aviation-600/80 leading-relaxed mt-0.5">{desc}</p>
         </Link>
     );
 }

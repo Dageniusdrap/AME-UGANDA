@@ -109,7 +109,7 @@ export default function AdvocacyPage() {
       <section className="bg-gradient-to-r from-aviation-600 to-aviation-800 text-white py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">Advocacy & Member Protection</h1>
+            <h1 className="text-3xl md:text-5xl font-bold mb-6">Advocacy & Member Protection</h1>
             <p className="text-xl text-aviation-100 mb-6">
               Aviation Engineers Uganda is a movement to reclaim our industry. We demand the prioritization of qualified Ugandan engineers over foreign labor, ensuring fair wages and equal benefits for our Aeronautical, Aerospace, and Maintenance experts.
             </p>

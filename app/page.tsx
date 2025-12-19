@@ -61,7 +61,7 @@ export default function HomePage() {
               <span className="text-aviation-100 text-sm font-medium tracking-widest uppercase">The Voice of Ugandan Aviation</span>
             </div>
 
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-black text-white tracking-tight leading-none">
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold text-white tracking-tight leading-tight">
               Excellence in <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-aviation-300 via-white to-aviation-300 animate-gradient-x">
                 Aviation.
